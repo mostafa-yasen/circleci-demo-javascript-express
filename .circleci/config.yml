@@ -58,12 +58,12 @@ jobs:
   print_output_file:
     docker:
       - image: alpine:latest
-      
-    attach_workspace:
-      at: /tmp/workspace
 
     steps:
       - run:
+          attach_workspace:
+            at: /tmp/workspace
+
           name: Getting workspace value
           command: cp /tmp/workspace/output.txt ./output.txt
         
