@@ -40,3 +40,34 @@ jobs:
           prefix: coverage
       - store_test_results:
           path: test-results.xml
+          
+  save_hello_world_output:
+    docker:
+      image: alpine:latest
+      
+    steps:
+      - run:
+          name: Saving Hello Message
+          command: echo "Hello and welcome to our DevOps Course" > output.txt
+          
+    persist_to_workspace:
+      root: tmp/workspace
+      paths:
+        - ./output.txt
+
+  print_output_file:
+    docker:
+      image: alpine:latest
+      
+    attach_workspace:
+      at: /tmp/workspace
+
+    steps:
+      - run:
+          name: Getting workspace value
+          command: cp /tmp/workspace/output.txt ./output.txt
+        
+      - run:
+          name: Printing out the value of the output
+          command: cat ./output.txt
+          
