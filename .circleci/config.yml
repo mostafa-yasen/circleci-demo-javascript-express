@@ -43,7 +43,7 @@ jobs:
           
   save_hello_world_output:
     docker:
-      image: alpine:latest
+      - image: alpine:latest
       
     steps:
       - run:
@@ -57,7 +57,7 @@ jobs:
 
   print_output_file:
     docker:
-      image: alpine:latest
+      - image: alpine:latest
       
     attach_workspace:
       at: /tmp/workspace
