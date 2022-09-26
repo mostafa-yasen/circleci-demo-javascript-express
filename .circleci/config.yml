@@ -27,6 +27,10 @@ workflows:
   welcome_message_workflow:
     jobs:
       - welcome_message_job
+  
+  a_failing_workflow:
+    jobs:
+      - a_failing_job
 
 jobs:
   build:
@@ -62,7 +66,8 @@ jobs:
           prefix: coverage
       - store_test_results:
           path: test-results.xml
-          
+
+  # Trying Workspace file sharing          
   save_hello_world_output:
     docker:
       - image: alpine:latest
@@ -76,6 +81,7 @@ jobs:
           paths:
             - output.txt
 
+  # Trying Workspace file sharing
   print_output_file:
     docker:
       - image: alpine:latest
@@ -88,6 +94,7 @@ jobs:
           name: Getting workspace value
           command: cat ~/output.txt
 
+  # Trying commands
   welcome_message_job:
     docker:
       - image: alpine:latest
@@ -95,3 +102,18 @@ jobs:
     steps:
       - welcome_message:
           message: "Mostafa Yasin"
+
+  # Trying error catching
+  a_failing_job:
+    docker:
+      - image: alpine:latest
+
+    steps:
+      - run:
+          name: "A Simple Failing Job"
+          command: cd ~/NonExistingDir
+
+      - run:
+          name: "Error Handler"
+          command: echo "Error handled successfully"
+          when: on_fail
