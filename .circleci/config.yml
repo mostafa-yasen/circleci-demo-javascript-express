@@ -1,7 +1,7 @@
 version: 2.1
 
 commands:
-  welcomeMessage:
+  welcome_message:
     description: "A very simple command for demonstration purposes"
     parameters:
       message:
@@ -24,9 +24,9 @@ workflows:
           requires:
             - save_hello_world_output
 
-  welcomeMessageWorkflow:
+  welcome_message_workflow:
     jobs:
-      - welcomeMessageJob
+      - welcome_message_job
 
 jobs:
   build:
@@ -88,10 +88,10 @@ jobs:
           name: Getting workspace value
           command: cat ~/output.txt
 
-  welcomeMessageJob:
+  welcome_message_job:
     docker:
       - image: alpine:latest
 
     steps:
-      - welcomeMessage:
+      - welcome_message:
           message: "Mostafa Yasin"
