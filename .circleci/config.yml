@@ -1,5 +1,16 @@
 version: 2.1
 
+commands:
+  welcomeMessage:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      message:
+        type: string
+        default: "Hello World!"
+    steps:
+      - run: echo << parameters.to >>
+
+
 workflows:
   version: 2
   build:
@@ -12,6 +23,10 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+
+  welcomeMessageWorkflow:
+    jobs:
+      - welcomeMessageJob
 
 jobs:
   build:
@@ -72,3 +87,11 @@ jobs:
       - run:
           name: Getting workspace value
           command: cat ~/output.txt
+
+  welcomeMessageJob:
+    docker:
+      - image: alpine:latest
+
+    steps:
+      - welcomeMessage:
+          message: "Mostafa Yasin"
