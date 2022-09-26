@@ -55,11 +55,11 @@ jobs:
     steps:
       - run:
           name: Saving Hello Message
-          command: echo "Hello and welcome to our DevOps Course" > output.txt
+          command: echo "Hello and welcome to our DevOps Course" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
-            - ./output.txt
+            - output.txt
 
   print_output_file:
     docker:
