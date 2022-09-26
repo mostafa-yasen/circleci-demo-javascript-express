@@ -13,20 +13,20 @@ commands:
 
 workflows:
   version: 2
-  build:
-    jobs:
-      - build
+#   build:
+#     jobs:
+#       - build
       
-  say_hello:
-    jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+#   say_hello:
+#     jobs:
+#       - save_hello_world_output
+#       - print_output_file:
+#           requires:
+#             - save_hello_world_output
 
-  welcome_message_workflow:
-    jobs:
-      - welcome_message_job
+#   welcome_message_workflow:
+#     jobs:
+#       - welcome_message_job
   
   a_failing_workflow:
     jobs:
