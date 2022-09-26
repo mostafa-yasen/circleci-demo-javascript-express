@@ -56,24 +56,19 @@ jobs:
       - run:
           name: Saving Hello Message
           command: echo "Hello and welcome to our DevOps Course" > output.txt
-          persist_to_workspace:
-            root: tmp/workspace
-            paths:
-              - ./output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - ./output.txt
 
   print_output_file:
     docker:
       - image: alpine:latest
 
     steps:
-      - run:
-          attach_workspace:
-            at: /tmp/workspace
+      - attach_workspace:
+          at: ~/
 
-          name: Getting workspace value
-          command: cp /tmp/workspace/output.txt ./output.txt
-        
       - run:
-          name: Printing out the value of the output
-          command: cat ./output.txt
-          
+          name: Getting workspace value
+          command: cat ~/output.txt
